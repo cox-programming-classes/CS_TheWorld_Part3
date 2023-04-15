@@ -1,5 +1,6 @@
 ﻿using CS_TheWorld_Part3.Areas;
 using CS_TheWorld_Part3.Creatures;
+using CS_TheWorld_Part3.GameMath;
 
 namespace CS_TheWorld_Part3.GameMechanics;
 
@@ -30,15 +31,46 @@ public static partial class Program
     {
         _currentArea = InitializeTheWorld();
         _player = new(GetPlayerInput("What is your name?"));
+        // By "Adding" a method handler to each of these Events
+        // we can define what happens for the player when each
+        // of these things happens.
+        _player.Stats.LevelUp += PlayerLevelUp;
+        _player.Stats.Death += PlayerDeath;
+        _player.Stats.HPChanged += PlayerHPChanged;
         
         WriteLinePositive($"Hello, {_player.Name}");
         string command = GetPlayerInput();
         while (command != "quit")
         {
+            // TODO:  Implement a background thread that can interupt the game loop to add depth to the game.  [Varying Difficulty]
+            
             ProcessCommandString(command);
             command = GetPlayerInput();
         }
         
         WriteLinePositive("BYE!");
+    }
+    
+    private static void PlayerHPChanged(object? sender, int e)
+    {
+        if (e == 0)
+            return;
+        if (e < 0)
+            WriteLineNegative($"You take {-e} damage!");
+        else
+            WriteLinePositive($"You gain {e} hit points");
+    }
+
+    private static void PlayerDeath(object? sender, EventArgs e)
+    {
+        if (e is OnDeathEventArgs deathArgs)
+        {
+            WriteNegative($"Oof that hurt:  Your HP hit {deathArgs.Overkill}");
+        }
+    }
+
+    private static void PlayerLevelUp(object? sender, EventArgs e)
+    {
+        WriteLinePositive($"Congratz You're now Level {_player.Stats.Level}");
     }
 }

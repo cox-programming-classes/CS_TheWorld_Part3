@@ -1,16 +1,19 @@
-namespace CS_TheWorld_Part3.GameMechanics;
+
+namespace CS_TheWorld_Part3.GameMath;
 
 public class StatChart
 {
     /// <summary>
     /// This Event occurs when the HP on this stat chart drops below zero
     /// </summary>
-    public event EventHandler OnDeath;
+    public event EventHandler Death;
+
+    public event EventHandler<int> HPChanged;
     
     /// <summary>
     /// This Event occurs when your Exp reaches the next level (calculated in the GainExp function)
     /// </summary>
-    public event EventHandler OnLevelUp;
+    public event EventHandler LevelUp;
     
     /// <summary>
     /// The player's level.
@@ -64,6 +67,7 @@ public class StatChart
     /// <param name="amount"></param>
     public void ChangeHP(int amount)
     {
+        HPChanged?.Invoke(this, amount);
         HP += amount;
         if(HP > MaxHP)
             HP = (int)MaxHP;
@@ -72,7 +76,7 @@ public class StatChart
         {
             var overkill = HP;
             HP = 0;
-            OnDeath?.Invoke(this, new OnDeathEventArgs() { Overkill = overkill});
+            Death?.Invoke(this, new OnDeathEventArgs() { Overkill = overkill});
         }
     }
 
@@ -85,6 +89,7 @@ public class StatChart
         var prev = Exp;
         Exp += amount;
         // Right now, leveling is calculated on a Logarithmic curve.  Each level needs e^n more Exp to achieve.
+        // TODO:  Improve the algorithm for leveling up to be less ... awful [Moderate]
         var logPrev = Math.Floor(Math.Log(1+(prev / 10.0)));
         var logNew = Math.Floor(Math.Log(1+(Exp / 10.0)));
         var levelChange = (int) (logNew - logPrev);
@@ -98,8 +103,8 @@ public class StatChart
 
             HP = (int)MaxHP;
             // This is how we raise an Event that is defined.
-            // This calls all places where the OnLevelUp event has been attached to this instance.
-            OnLevelUp?.Invoke(this, EventArgs.Empty);
+            // This calls all places where the LevelUp event has been attached to this instance.
+            LevelUp?.Invoke(this, EventArgs.Empty);
         }
     }
 }

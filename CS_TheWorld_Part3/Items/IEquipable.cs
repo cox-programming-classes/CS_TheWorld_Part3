@@ -1,4 +1,4 @@
-using CS_TheWorld_Part3.GameMechanics;
+using CS_TheWorld_Part3.GameMath;
 
 namespace CS_TheWorld_Part3.Items;
 

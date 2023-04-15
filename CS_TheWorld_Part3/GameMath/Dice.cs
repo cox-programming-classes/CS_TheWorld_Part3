@@ -1,10 +1,10 @@
 using System.Diagnostics;
 
-namespace CS_TheWorld_Part3.GameMechanics;
+namespace CS_TheWorld_Part3.GameMath;
 
-public class Dice
+public readonly struct Dice
 {
-    public static Dice None = new(sides: 0);
+    public static Dice None = new(count: 0, sides: 0);
     
     public static Dice D4 = new(sides: 4);
     public static Dice D6 = new(sides: 6);
@@ -35,7 +35,7 @@ public class Dice
     /// The Modifier may be changed after initialization, but only from within the Dice class,
     /// and it has a default value of 0.
     /// </summary>
-    public int Modifier { get; protected set; } = 0;
+    public int Modifier { get; init; } = 0;
 
     /// <summary>
     /// Create a new Dice with the given values.
@@ -49,6 +49,13 @@ public class Dice
         Count = count;
         SideCount = sides;
         Modifier = mod;
+    }
+
+    public Dice(string diceString)
+    {
+        // TODO:  Implement the string constructor for Dice that converts "2d4+5" into a Dice. [Moderate]
+        // TODO:  Improve the constructor using Regular Expressions to validate the diceString [Difficult]
+        throw new NotImplementedException("You Gotta Write this!");
     }
     
     /// <summary>

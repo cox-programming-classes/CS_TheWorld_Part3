@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
 using CS_TheWorld_Part3.Creatures;
-using CS_TheWorld_Part3.GameMechanics;
+using CS_TheWorld_Part3.GameMath;
 using CS_TheWorld_Part3.Items;
 
 namespace CS_TheWorld_Part3.Areas;
@@ -13,6 +13,9 @@ public class Area
     /// the Function takes the Player as a parameter
     /// and returns TRUE if this should interrupt the go command and
     /// prevent the player from entering this area.
+    ///
+    /// TODO:  Reaserch!  What are these data types Func<...> and Action<...>? [Moderate]
+    /// TODO:  Identify other areas in the game where a Func<...> and Action<...> might be useful. [Varying Difficulty]
     /// </summary>
     public Func<Player, bool>? OnEntryAction { get; init; } = (player) => false;
 
@@ -65,6 +68,10 @@ public class Area
 
         return _items[uniqueName];
     }
+    
+    /// <summary>
+    /// TODO:  Write a RemoveItem method that removes an item from the area so that it is not duplicated when picked up [Easy]
+    /// </summary>
 
     public ReadOnlyDictionary<UniqueName, Creature> Creatures => new(_creatures);
     public void AddCreature(UniqueName uniqueName, Creature creature)
@@ -110,4 +117,6 @@ public class Area
 
         return _neighbors.First(kvp => kvp.Key.DirectionName == uniqueName).Value;
     }
+    
+    // TODO:  Write a RemoveNeighbor method.  This may be deceptive--think about how and why you might need this! [Moderate]
 }

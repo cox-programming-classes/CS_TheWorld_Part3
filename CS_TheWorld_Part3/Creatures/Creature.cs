@@ -1,5 +1,5 @@
 using System.Collections.ObjectModel;
-using CS_TheWorld_Part3.GameMechanics;
+using CS_TheWorld_Part3.GameMath;
 using CS_TheWorld_Part3.Items;
 
 namespace CS_TheWorld_Part3.Creatures;
@@ -15,7 +15,14 @@ public class Creature : ICreature
     /// </summary>
     public StatChart Stats { get; init; }
 
-    public ReadOnlyDictionary<EquipSlot, IEquipable> Equipment { get; init; }
-    public ReadOnlyDictionary<UniqueName, ICarryable> Items { get; init; }
+    
+
+    public ReadOnlyDictionary<EquipSlot, IEquipable> Equipment { get; init; } = new(new Dictionary<EquipSlot, IEquipable>());
+    public ReadOnlyDictionary<UniqueName, ICarryable> Items { get; init; } = new(new Dictionary<UniqueName, ICarryable>());
+
+    /// <summary>
+    /// Different Creatures can have Different Combat mechanics.
+    /// TODO:  Add new Combat Logic for different creatures! [Moderate]
+    /// </summary>
     public Action<ICreature, Command> CombatLogic { get; init; }
 }

@@ -1,4 +1,5 @@
 
+using CS_TheWorld_Part3.GameMath;
 using CS_TheWorld_Part3.Creatures;
 using CS_TheWorld_Part3.Items;
 using CS_TheWorld_Part3.Areas;
@@ -30,10 +31,20 @@ public static class Extensions
     {
         WriteLineNeutral($"{item.Name} : {item.Description}");
     }
+    
+    /// <summary>
+    /// Look at a Creature in much the same way that you look at an item.
+    /// </summary>
+    /// <param name="creature"></param>
     public static void LookAt(this Creature creature)
     {
         WriteLineNeutral($"{creature.Name} : {creature.Description}");
     }
+    
+    /// <summary>
+    /// Look around a given area
+    /// </summary>
+    /// <param name="area"></param>
     public static void LookAround(this Area area)
     {
         {

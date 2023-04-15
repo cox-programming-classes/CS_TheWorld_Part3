@@ -1,6 +1,6 @@
 namespace CS_TheWorld_Part3.Items;
 
-public interface IUsableItem
+public interface IUsable
 {
     /// <summary>
     /// A function that takes a target object and returns
@@ -10,13 +10,17 @@ public interface IUsableItem
     /// This may take into account that the target could be
     /// different kinds of things
     /// </summary>
-    public Func<object, string>? TargetedAction 
-        { get; init; }
-    
+    public string UseOn(object target)
+    {
+        return $"{this} has no effect on {target}";
+    }
+
     /// <summary>
     /// Function that returns the text that should be printed
     /// when this item is used without a target.
     /// </summary>
-    public Func<string>? BasicAction 
-        { get; init; }
+    public string Use()
+    {
+        return $"{this} doesn't do anything";
+    }
 }

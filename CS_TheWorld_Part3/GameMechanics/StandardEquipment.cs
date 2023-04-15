@@ -1,6 +1,7 @@
-using CS_TheWorld_Part3.GameMechanics;
+using CS_TheWorld_Part3.GameMath;
+using CS_TheWorld_Part3.Items;
 
-namespace CS_TheWorld_Part3.Items;
+namespace CS_TheWorld_Part3.GameMechanics;
 
 public class StandardEquipment : 
     Item, ICarryable, IEquipable
@@ -28,4 +29,7 @@ public class StandardEquipment :
             new(0, 2, Dice.D20, Dice.D4),
         Slot = EquipSlot.OffHand
     };
+    
+    // TODO:  Create more standard equipment! [Easy]
+    // TODO:  Create more advanced equipment by creating more classes that extend StandardEquipment and also implement IUseableItem [Difficult]
 }

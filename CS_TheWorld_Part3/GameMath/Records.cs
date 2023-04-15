@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 
-namespace CS_TheWorld_Part3.GameMechanics;
+namespace CS_TheWorld_Part3.GameMath;
 
 /// <summary>
 /// The Outcome of an Damage roll.
@@ -60,7 +60,7 @@ public readonly struct UniqueName
     /// Regular Expressions are used to validate text data.
     /// this particular one means that it must be 2 or more lowercase letters.
     /// </summary>
-    private static Regex _validationExpression = new("^[a-z]{2,}$", RegexOptions.Compiled);
+    private static Regex _validationExpression = new("^[a-z_-]{2,}$", RegexOptions.Compiled);
     private static bool Validate(string value) => _validationExpression.IsMatch(value);
     
     private string Value { get; }
