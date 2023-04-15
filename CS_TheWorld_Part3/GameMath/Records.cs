@@ -2,12 +2,6 @@ using System.Text.RegularExpressions;
 
 namespace CS_TheWorld_Part3.GameMath;
 
-/// <summary>
-/// The Outcome of an Damage roll.
-/// </summary>
-/// <param name="Hit">Does this Hit?</param>
-/// <param name="Damage">How much damage does it do?</param>
-public record AttackOutcome(bool Hit, int Damage);
 
 /// <summary>
 /// A command string. take a list of words typed by the user.

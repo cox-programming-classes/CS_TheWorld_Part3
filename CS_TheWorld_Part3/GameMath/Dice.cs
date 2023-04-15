@@ -78,18 +78,18 @@ public readonly struct Dice
 
     /// <summary>
     /// Return a D&D style Dice name scheme
-    /// something like "4 D10 +5"
+    /// something like "4d10+5"
     /// </summary>
     /// <returns></returns>
     public override string ToString()
     {
-        var str = $"{Count} D{SideCount}";
+        var str = $"{Count}d{SideCount}";
         if (Modifier == 0)
             return str;
         
         if (Modifier < 0)
-            return $"{str} {Modifier}";
+            return $"{str}{Modifier}";
 
-        return $"{str} +{Modifier}";
+        return $"{str}+{Modifier}";
     }
 }

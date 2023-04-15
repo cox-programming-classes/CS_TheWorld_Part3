@@ -8,31 +8,9 @@ using static TextFormatter;
 
 public static partial class Program
 {
-    /// <summary>
-    /// Encapsulate all the basic things that need to happen when a creature is killed.
-    /// Use this in the creature.Stats.PlayerDeath event handler.
-    /// </summary>
-    /// <param name="creatureUid"></param>
-    /// <param name="deadCritter"></param>
-    /// <param name="deathMessage"></param>
-    private static void OnCreatureDeath(UniqueName creatureUid, ICreature deadCritter, string deathMessage)
-    {
-        _player.Stats.GainExp(deadCritter.Stats.Exp);
-        WriteLineSurprise(deathMessage);
-        if (deadCritter.Items.Any())
-        {
-            WriteLineSurprise($"{deadCritter.Name} drops:");
-            foreach (var name in deadCritter.Items.Keys)
-            {
-                WriteNeutral("\tA [");
-                WriteSurprise($"{name}");
-                WriteLineNeutral("]");
-                // TODO:  There is potentially an error here!  Watchout! [Moderate]
-                _currentArea.AddItem(name, (deadCritter.Items[name] as Item)!);
-            }
-        }
-        _currentArea.DeleteCreature(creatureUid);
-    }
+    // TODO:  Non-Coding!  Create a storyboard layout planning your world
+    // TODO:  Create a story to your world.  This can be written out at first, but should be incorporated into the game
+    // TODO:  Add Lore to the game in the form of special items, game events that have a narrative, and creatures that can engage in dialog
     
     /// <summary>
     /// Build all the areas and link them together.
@@ -135,8 +113,8 @@ public static partial class Program
             }
         };
 
-        // TODO:  This Mechanic of creating a creature then applying the death event is clunky
-        //        Can you make it better?  [Extremely Difficult]
+        // TODO:  This Mechanic of creating a creature then applying the death event is clunky [Extremely Difficult]
+        //        Can you make it better?  
         var firebird = StandardCreatures.FireBird;
         firebird.Stats.Death += (sender, args) =>
             OnCreatureDeath("firebird", firebird, 
@@ -148,5 +126,31 @@ public static partial class Program
         
         // return the starting area.
         return start;
+    }
+    
+    /// <summary>
+    /// Encapsulate all the basic things that need to happen when a creature is killed.
+    /// Use this in the creature.Stats.PlayerDeath event handler.
+    /// </summary>
+    /// <param name="creatureUid"></param>
+    /// <param name="deadCritter"></param>
+    /// <param name="deathMessage"></param>
+    private static void OnCreatureDeath(UniqueName creatureUid, ICreature deadCritter, string deathMessage)
+    {
+        _player.Stats.GainExp(deadCritter.Stats.Exp);
+        WriteLineSurprise(deathMessage);
+        if (deadCritter.Items.Any())
+        {
+            WriteLineSurprise($"{deadCritter.Name} drops:");
+            foreach (var name in deadCritter.Items.Keys)
+            {
+                WriteNeutral("\tA [");
+                WriteSurprise($"{name}");
+                WriteLineNeutral("]");
+                // TODO:  There is potentially an error here!  Watchout! [Moderate]
+                _currentArea.AddItem(name, (deadCritter.Items[name] as Item)!);
+            }
+        }
+        _currentArea.DeleteCreature(creatureUid);
     }
 }

@@ -27,6 +27,10 @@ public interface ICreature
         }
     }
     
+    // TODO:  Define an EffectiveAttackDice Property that selects the creatures Base attack dice if no weapon is equiped,
+    //        OR Selects the equiped weapon(s) attack dice [Difficult]
+    
+    
     public ReadOnlyDictionary<EquipSlot, IEquipable> Equipment { get; }
     
     public ReadOnlyDictionary<UniqueName, ICarryable> Items { get; }
