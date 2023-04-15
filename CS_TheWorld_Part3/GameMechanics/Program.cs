@@ -6,6 +6,11 @@ namespace CS_TheWorld_Part3.GameMechanics;
 
 using static TextFormatter;
 
+// TODO:  Save your Game!  (Create a save file so that your game state can be saved and re-loaded later!) [Very Difficult]
+// TODO:  Save Game Step 1:  Serializing the game state -- every object in the computers memory related to this game need to be converted into data. [Difficult]
+// TODO:  Save Game Step 2:  A file format must be chosen (created) in order to store all the game data. [Very Difficult]
+// TODO:  Save Game Step 3:  `save` must be implemented as a command in the CommandParser and should initiate the serialization of the game [Moderate]
+// TODO:  Save Game Step 4:  Once data is saved to a file, it does no good unless you can load it from that file later! [Very Difficult]
 public static partial class Program
 {
     #region Global Variables

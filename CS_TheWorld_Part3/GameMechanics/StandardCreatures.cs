@@ -25,4 +25,8 @@ public static class StandardCreatures
 
 
     // TODO:  Create Some more CREATURES! [Easy]
+    // TODO:  Create more KINDS of creatures. [Varying Difficulty]
+    // TODO:  Creatures with special abilities [Moderate]
+    // TODO:  NPCs that can engage in Dialog [Difficult]
+    // TODO:  NPCs that you can engage in commerce with [Very Difficult]
 }

@@ -11,13 +11,16 @@ using static TextFormatter;
 /// </summary>
 public static partial class Program
 {
-    private static List<UniqueName> _commandWords = new()
+    /// <summary>
+    /// Upgraded Command Words!  Now this is a mapping from the command word to the Action that happens!
+    /// </summary>
+    private static Dictionary<UniqueName, Action<Command>> _commandWords = new()
     {
-        "look", 
-        "get", 
-        "fight", 
-        "cheat", 
-        "go" // new command
+        {"look", ProcessLookCommand },
+        {"get", command => throw new NotImplementedException("Gotta write this!") },  
+        {"fight", ProcessFightCommand },
+        {"cheat", command => _player.Stats.GainExp(50) }, 
+        {"go", ProcessGoCommand }
     };
 
     // TODO:  Add a `stats` command that displays the Players current Stats. [Easy]
@@ -34,28 +37,24 @@ public static partial class Program
     // TODO:  Extend the `use` command to allow the player to target themself by accepting the word `self` as the secondary target of a command [Difficult]
     
     
+    /// <summary>
+    /// Process the Command string typed by the player.
+    /// </summary>
+    /// <param name="command"></param>
     private static void ProcessCommandString(Command command)
     {
         if (string.IsNullOrWhiteSpace(command.CommandWord))
             return;
         
-        if (!_commandWords.Contains(command.CommandWord))
+        if (!_commandWords.ContainsKey(command.CommandWord))
         {
             WriteLineWarning("I don't know what that means.");
         }
-        
-        if(command.CommandWord == "cheat")
-            _player.Stats.GainExp(50);
-        if(command.CommandWord == "look")
-            ProcessLookCommand(command);
-        if (command.CommandWord == "fight")
-            ProcessFightCommand(command);
-        if (command.CommandWord == "go")
-            ProcessGoCommand(command);
-        
-        // TODO:  Implement the `get` command [Easy]
-    }
 
+        // TODO:  Reasearch!  Oh good god what the hell is this? [Moderate]
+        _commandWords[command.CommandWord](command);
+    }
+    
     private static void ProcessGoCommand(Command command)
     {
         if (command.Target == "")
