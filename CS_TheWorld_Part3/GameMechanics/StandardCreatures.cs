@@ -16,6 +16,27 @@ public static class StandardCreatures
         Stats = new StatChart(10, 10, Dice.D20, new(2, 4, -2))
     };
 
+    public static Creature Marsupial
+    {
+        get
+        {
+            var marsupial = new Creature()
+            {
+                Name = "Posssuuuuuummsss",
+                Description = "It's definitely a possum",
+                Stats = new(50, 12, Dice.D20, new(2, 6)),
+                Items = new(new Dictionary<UniqueName, ICarryable>()
+                {
+                    { "firestone", new KeyStone() }
+                })
+            };
+            
+            return marsupial;
+        }
+    }
+
+    private static string guid = Guid.NewGuid().ToString();
+    
     public static Creature FireBird => new()
     {
         Name="Fire Bird",

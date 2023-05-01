@@ -17,7 +17,8 @@ public class Area
     /// TODO:  Reaserch!  What are these data types Func<...> and Action<...>? [Moderate]
     /// TODO:  Identify other areas in the game where a Func<...> and Action<...> might be useful. [Varying Difficulty]
     /// </summary>
-    public Func<Player, bool>? OnEntryAction { get; init; } = (player) => false;
+    public Func<Player, bool>? OnEntryAction { get; init; } = 
+        (player) => false;
 
     /// <summary>
     /// Something that happens when the player Leaves the area...

@@ -1,6 +1,8 @@
-﻿using CS_TheWorld_Part3.Areas;
+﻿using System.Text.Json;
+using CS_TheWorld_Part3.Areas;
 using CS_TheWorld_Part3.Creatures;
 using CS_TheWorld_Part3.GameMath;
+using CS_TheWorld_Part3.Items;
 
 namespace CS_TheWorld_Part3.GameMechanics;
 
@@ -42,6 +44,12 @@ public static partial class Program
         _player.Stats.LevelUp += PlayerLevelUp;
         _player.Stats.Death += PlayerDeath;
         _player.Stats.HPChanged += PlayerHPChanged;
+
+        var keystone = StandardItems.FireStone;
+
+        var json = JsonSerializer.Serialize(keystone);
+        
+        Console.WriteLine(json);
         
         WriteLinePositive($"Hello, {_player.Name}");
         string command = GetPlayerInput();
