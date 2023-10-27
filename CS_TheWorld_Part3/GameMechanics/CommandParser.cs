@@ -49,6 +49,7 @@ public static partial class Program
         if (!_commandWords.ContainsKey(command.CommandWord))
         {
             WriteLineWarning("I don't know what that means.");
+            return;
         }
 
         // TODO:  Reasearch!  Oh good god what the hell is this? [Moderate]
